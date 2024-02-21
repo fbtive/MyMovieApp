@@ -3,6 +3,12 @@
     <style name="Base.Theme.MyMovieApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+
     </style>
 
     <style name="Theme.MyMovieApp" parent="Base.Theme.MyMovieApp" />
