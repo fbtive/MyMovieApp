@@ -1,0 +1,112 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.example.mymovieapp'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.mymovieapp"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+        buildConfig true
+    }
+
+    flavorDimensions 'com.example.mymovieapp'
+
+    productFlavors {
+        development {
+            Properties props = getLocalProperties(false)
+
+            dimension 'com.example.mymovieapp'
+            buildConfigField "String", "BASE_URL", props['BASE_URL']
+            buildConfigField "String", "MEDIA_URL", props['MEDIA_URL']
+            buildConfigField "String", "BEARER_TOKEN", props['BEARER_TOKEN']
+        }
+
+        production {
+            Properties props = getLocalProperties(true)
+
+            dimension 'com.example.mymovieapp'
+            buildConfigField "String", "BASE_URL", props['BASE_URL']
+            buildConfigField "String", "MEDIA_URL", props['MEDIA_URL']
+            buildConfigField "String", "BEARER_TOKEN", props['BEARER_TOKEN']
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "androidx.core:core-ktx:$core_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.activity:activity-ktx:$activity_version"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$gson_converter_version"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+def getLocalProperties(boolean production) {
+    Properties props = new Properties();
+    String configFile = '../local.properties'
+    if(production) {
+        configFile = '../config.properties'
+    }
+    if(file(configFile).exists()) {
+        props.load(new FileInputStream(file(configFile)))
+    }
+
+
+    return props
+}
