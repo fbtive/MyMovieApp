@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.example.mymovieapp.R
 import com.example.mymovieapp.data.Payload
 import com.example.mymovieapp.databinding.FragmentMovieDetailBinding
@@ -37,6 +39,7 @@ class FragmentMovieDetail : Fragment() {
     private fun initUI(){
         val bundle = requireArguments()
         viewModel.setMovieId(bundle.getInt("id"))
+
     }
 
     private fun setupObserver() {
@@ -48,6 +51,9 @@ class FragmentMovieDetail : Fragment() {
             data?.let {
                 binding.movie = it
                 binding.movieReleaseDate.text = formatSimpleDate(it.releaseDate)
+                binding.reviewButton.setOnClickListener {
+                    navigateToMovieReview(data.id, data.title)
+                }
             }
         }
 
@@ -57,6 +63,22 @@ class FragmentMovieDetail : Fragment() {
                     viewModel.refreshMovieDetail()
                 }.show()
         }
+    }
+
+    private fun navigateToMovieReview(id: Int, title: String) {
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.slide_in_right)
+            .setExitAnim(R.anim.slide_out_left)
+            .setPopExitAnim(R.anim.slide_out_right)
+            .setPopEnterAnim(R.anim.slide_in_left)
+            .build()
+
+        val bundle = Bundle()
+        bundle.putInt("id", id)
+        bundle.putString("name", title)
+
+        findNavController().navigate(R.id.fragmentMovieReviews, bundle, navOptions)
+
     }
 
 }

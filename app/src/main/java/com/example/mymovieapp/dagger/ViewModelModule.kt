@@ -3,6 +3,7 @@ package com.example.mymovieapp.dagger
 import android.content.Context
 import com.example.mymovieapp.data.GenreRepository
 import com.example.mymovieapp.data.MoviesRepository
+import com.example.mymovieapp.data.ReviewsRepository
 import com.example.mymovieapp.data.remote.api.MovieApi
 import dagger.Module
 import dagger.Provides
@@ -22,4 +23,8 @@ class ViewModelModule {
     @Provides
     @ViewModelScoped
     fun provideMoviesRepository(@ApplicationContext context: Context, movieApi: MovieApi): MoviesRepository = MoviesRepository(context, movieApi)
+
+    @Provides
+    @ViewModelScoped
+    fun provideReviewsRepository(@ApplicationContext context: Context, movieApi: MovieApi): ReviewsRepository = ReviewsRepository(context, movieApi)
 }

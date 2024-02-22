@@ -12,10 +12,9 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mymovieapp.R
 import com.example.mymovieapp.adapter.MovieListAdapter
-import com.example.mymovieapp.adapter.MovieListLoadStateAdapter
+import com.example.mymovieapp.adapter.GeneralLoadStateAdapter
 import com.example.mymovieapp.data.remote.response.Movie
 import com.example.mymovieapp.databinding.FragmentMovieListBinding
-import com.example.mymovieapp.paging.MovieListPagingSource
 import com.example.mymovieapp.viewmodel.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,8 +25,8 @@ class FragmentMovieList : Fragment() {
     private lateinit var binding: FragmentMovieListBinding
     private val viewModel by viewModels<MovieViewModel>()
     private lateinit var adapter: MovieListAdapter
-    private lateinit var headerAdapter: MovieListLoadStateAdapter
-    private lateinit var footerAdapter: MovieListLoadStateAdapter
+    private lateinit var headerAdapter: GeneralLoadStateAdapter
+    private lateinit var footerAdapter: GeneralLoadStateAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,8 +50,8 @@ class FragmentMovieList : Fragment() {
         viewModel.setGenre(id)
 
         adapter = MovieListAdapter(this::navigateToMovieDetail)
-        headerAdapter = MovieListLoadStateAdapter { adapter.retry() }
-        footerAdapter = MovieListLoadStateAdapter { adapter.retry() }
+        headerAdapter = GeneralLoadStateAdapter { adapter.retry() }
+        footerAdapter = GeneralLoadStateAdapter { adapter.retry() }
 
         binding.apply {
             val gridLayoutManager = GridLayoutManager(requireContext(), 2)
@@ -81,7 +80,7 @@ class FragmentMovieList : Fragment() {
                 Snackbar.make(binding.root, getString(R.string.error_unknown), Snackbar.LENGTH_SHORT)
                     .setAction("REFRESH") {
                         adapter.refresh()
-                    }
+                    }.show()
             }
         }
     }

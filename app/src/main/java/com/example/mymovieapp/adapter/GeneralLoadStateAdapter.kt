@@ -1,7 +1,6 @@
 package com.example.mymovieapp.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
@@ -9,8 +8,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mymovieapp.databinding.ListItemUiLoadingBinding
 
-class MovieListLoadStateAdapter(private val onClickRetry: () -> Unit):
-    LoadStateAdapter<MovieListLoadStateAdapter.MovieLoadStateViewHolder>() {
+class GeneralLoadStateAdapter(private val onClickRetry: () -> Unit):
+    LoadStateAdapter<GeneralLoadStateAdapter.MovieLoadStateViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

@@ -3,6 +3,7 @@ package com.example.mymovieapp.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class MovieDetail(
+    val id: Int,
     val title: String,
     val overview: String,
     @SerializedName("vote_average")

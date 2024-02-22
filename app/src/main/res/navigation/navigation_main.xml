@@ -27,5 +27,14 @@
         android:id="@+id/fragmentMovieDetail"
         android:name="com.example.mymovieapp.ui.FragmentMovieDetail"
         android:label="Movie"
-        tools:layout="@layout/fragment_movie_detail" />
+        tools:layout="@layout/fragment_movie_detail" >
+        <action
+            android:id="@+id/action_fragmentMovieDetail_to_fragmentMovieReviews"
+            app:destination="@id/fragmentMovieReviews" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMovieReviews"
+        android:name="com.example.mymovieapp.ui.FragmentMovieReviews"
+        android:label="Movie Reviews"
+        tools:layout="@layout/fragment_movie_reviews"/>
 </navigation>
