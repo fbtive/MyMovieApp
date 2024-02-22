@@ -3,6 +3,7 @@ package com.example.mymovieapp.dagger
 import android.content.Context
 import com.example.mymovieapp.BuildConfig
 import com.example.mymovieapp.data.remote.api.AuthorizationInterceptor
+import com.example.mymovieapp.data.remote.api.MovieApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,4 +43,7 @@ class ApplicationModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    @Provides
+    @Singleton
+    fun provideMovieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
 }

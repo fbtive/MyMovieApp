@@ -11,6 +11,7 @@ class AuthorizationInterceptor constructor(val context: Context): Interceptor {
         val request = chain.request()
             .newBuilder()
             .addHeader("Authorization", "Bearer ${BuildConfig.BEARER_TOKEN}")
+            .addHeader("accept", "application/json")
             .build()
 
         val response: Response = chain.proceed(request)

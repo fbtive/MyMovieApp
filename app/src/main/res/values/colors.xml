@@ -8,4 +8,6 @@
     <color name="secondaryColor">#ff7e55</color>
     <color name="primaryTextColor">#202020</color>
     <color name="secondaryTextColor">#fafafa</color>
+
+    <color name="colorGrey">#757575</color>
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/genreItem"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/border_grey_radius_8"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/genreTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="[GENRE]" />
+    </LinearLayout>
+</layout>
