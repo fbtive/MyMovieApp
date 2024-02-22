@@ -14,10 +14,11 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
         val stringUrl = "${BuildConfig.MEDIA_URL}w220_and_h330_face${imgUrl}"
         val uri = stringUrl.toUri()
 
-        Glide.with(imageView)
+        Glide.with(imageView.context)
             .load(uri)
             .transition(DrawableTransitionOptions.withCrossFade())
             .error(R.drawable.baseline_hide_image_24)
+            .fitCenter()
             .into(imageView)
     } ?: imageView.setImageResource(R.drawable.baseline_hide_image_24)
 }

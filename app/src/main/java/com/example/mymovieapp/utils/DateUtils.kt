@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 fun formatSimpleDate(value: String) : String {
+    if(value == "") return ""
+
     val parser = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val formatter = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
 
@@ -15,6 +17,8 @@ fun formatSimpleDate(value: String) : String {
 }
 
 fun formatIsoDateToDateTime(value: String): String {
+    if(value == "") return ""
+
     val dateTime = DateTime(value)
     val dtf = DateTimeFormat.forPattern("MMM dd, yyyy - HH:mm")
 
