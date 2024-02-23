@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -29,8 +30,8 @@ class FragmentYtPlayer : Fragment() {
                 // if the player is in fullscreen, exit fullscreen
                 youTubePlayer.toggleFullscreen()
             } else {
-                findNavController().navigateUp()
                 toggleSystemUI(false)
+                findNavController().navigateUp()
             }
         }
     }
@@ -47,7 +48,7 @@ class FragmentYtPlayer : Fragment() {
     }
 
     private fun initUI() {
-        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         toggleSystemUI(true)
 
         val videoId = requireArguments().getString("key")
@@ -85,17 +86,25 @@ class FragmentYtPlayer : Fragment() {
     }
 
     private fun toggleSystemUI(hide: Boolean) {
-        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, false)
         WindowInsetsControllerCompat(requireActivity().window, binding.youtubePlayerView).let {
                 controller: WindowInsetsControllerCompat ->
 
-            if(hide)
+            if(hide) {
+                WindowCompat.setDecorFitsSystemWindows(requireActivity().window, false)
                 controller.hide(WindowInsetsCompat.Type.systemBars())
-            else
+            } else {
+                WindowCompat.setDecorFitsSystemWindows(requireActivity().window, true)
                 controller.show(WindowInsetsCompat.Type.systemBars())
+            }
 
             controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
 
 }

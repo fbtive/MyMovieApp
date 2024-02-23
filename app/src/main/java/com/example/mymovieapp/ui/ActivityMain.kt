@@ -23,9 +23,13 @@ class ActivityMain : AppCompatActivity() {
         navController = findNavController(R.id.mainNavHostFragment)
 
         NavigationUI.setupWithNavController(binding.topAppBar, navController, null)
+
+        binding.topAppBar.setNavigationOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, null)
+        return NavigationUI.navigateUp(navController, null) || super.onSupportNavigateUp()
     }
 }
