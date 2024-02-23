@@ -10,6 +10,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapp.R
 import com.example.mymovieapp.adapter.MovieListAdapter
 import com.example.mymovieapp.adapter.GeneralLoadStateAdapter
@@ -71,6 +72,8 @@ class FragmentMovieList : Fragment() {
                 footer = footerAdapter
             )
         }
+
+        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         adapter.addLoadStateListener { loadState ->
 

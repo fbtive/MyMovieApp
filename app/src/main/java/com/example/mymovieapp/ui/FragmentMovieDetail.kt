@@ -38,8 +38,10 @@ class FragmentMovieDetail : Fragment() {
 
     private fun initUI(){
         val bundle = requireArguments()
-        viewModel.setMovieId(bundle.getInt("id"))
+        val id = bundle.getInt("id")
+        viewModel.setMovieId(id)
 
+        binding.trailerButton.setOnClickListener { navigateToMovieTrailers(id) }
     }
 
     private fun setupObserver() {
@@ -78,7 +80,20 @@ class FragmentMovieDetail : Fragment() {
         bundle.putString("name", title)
 
         findNavController().navigate(R.id.fragmentMovieReviews, bundle, navOptions)
+    }
 
+    private fun navigateToMovieTrailers(id: Int) {
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.slide_in_right)
+            .setExitAnim(R.anim.slide_out_left)
+            .setPopExitAnim(R.anim.slide_out_right)
+            .setPopEnterAnim(R.anim.slide_in_left)
+            .build()
+
+        val bundle = Bundle()
+        bundle.putInt("id", id)
+
+        findNavController().navigate(R.id.fragmentTrailers, bundle, navOptions)
     }
 
 }

@@ -31,10 +31,27 @@
         <action
             android:id="@+id/action_fragmentMovieDetail_to_fragmentMovieReviews"
             app:destination="@id/fragmentMovieReviews" />
+        <action
+            android:id="@+id/action_fragmentMovieDetail_to_fragmentTrailers"
+            app:destination="@id/fragmentTrailers" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMovieReviews"
         android:name="com.example.mymovieapp.ui.FragmentMovieReviews"
         android:label="Movie Reviews"
         tools:layout="@layout/fragment_movie_reviews"/>
+    <fragment
+        android:id="@+id/fragmentTrailers"
+        android:name="com.example.mymovieapp.ui.FragmentTrailers"
+        android:label="Trailers"
+        tools:layout="@layout/fragment_trailers">
+        <action
+            android:id="@+id/action_fragmentTrailers_to_fragmentYtPlayer"
+            app:destination="@id/fragmentYtPlayer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentYtPlayer"
+        android:name="com.example.mymovieapp.ui.FragmentYtPlayer"
+        android:label="Trailer"
+        tools:layout="@layout/fragment_yt_player" />
 </navigation>

@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import com.example.mymovieapp.R
 import com.example.mymovieapp.data.remote.api.MovieApi
 import com.example.mymovieapp.data.remote.response.MovieDetail
+import com.example.mymovieapp.data.remote.response.Trailer
 import com.example.mymovieapp.paging.MovieListPagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -40,6 +41,30 @@ class MoviesRepository(
                 ))
             }
         }catch (e: IOException) {
+            emit(Payload.Error(
+                Exception(context.getString(R.string.error_connectivity))
+            ))
+        } catch (e: Exception) {
+            emit(Payload.Error(
+                Exception(context.getString(R.string.error_unknown))
+            ))
+        }
+    }
+
+    fun getMovieTrailers(id: Int): Flow<Payload<List<Trailer>>> = flow {
+        try {
+            val response = movieApi.getMovieTrailers(movieId =  id)
+
+            if(response.isSuccessful) {
+                response.body()?.let {
+                    emit(Payload.Success(it.results))
+                } ?: throw Exception(context.getString(R.string.error_unknown))
+            }else {
+                emit(Payload.Error(
+                    Exception(context.getString(R.string.error_connectivity))
+                ))
+            }
+        } catch (e: IOException) {
             emit(Payload.Error(
                 Exception(context.getString(R.string.error_connectivity))
             ))

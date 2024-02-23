@@ -4,6 +4,7 @@ import com.example.mymovieapp.data.remote.response.MovieDetail
 import com.example.mymovieapp.data.remote.response.ResponseGenre
 import com.example.mymovieapp.data.remote.response.ResponseMovieList
 import com.example.mymovieapp.data.remote.response.ResponseReviewList
+import com.example.mymovieapp.data.remote.response.ResponseTrailerList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -28,5 +29,8 @@ interface MovieApi {
 
     @GET("movie/{id}/reviews")
     suspend fun getMovieReviews(@Path("id") movieId: Int, @Query("page") page: Int, @Query("language") language: String = "en") : ResponseReviewList
+
+    @GET("movie/{id}/videos")
+    suspend fun getMovieTrailers(@Path("id") movieId: Int, @Query("language") language: String = "en"): Response<ResponseTrailerList>
 }
 
